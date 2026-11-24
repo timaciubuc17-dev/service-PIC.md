@@ -8,7 +8,6 @@
 <title>Mașini de spălat verificate cu garanție în Chișinău | Service Pic MD</title>
 <meta name="description" content="Mașini de spălat verificate cu garanție în Chișinău: Miele și alte modele verificate în stoc. Livrare și conectare, consultanță la alegere. Scrieți-ne pe WhatsApp.">
 <meta name="robots" content="index, follow">
-<!-- Open Graph. Для превью в WhatsApp/Telegram замените на полный URL: https://ваш-домен.md/og-preview.jpg -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ro_MD">
 <meta property="og:site_name" content="Service Pic MD">
@@ -334,21 +333,21 @@ footer{padding:36px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--mu)
 <script>
 /* === НАСТРОЙКИ ДАННЫХ КЛИЕНТА === */
 const CFG={
-  wa:"37369808880",                                              // номер WhatsApp в международном формате (без + и пробелов)
-  tel:"+37369808880",                                            // номер для звонка и Viber
-  telShow:"069 80 88 80",                                        // номер на сайте
-  addr:"Or. Chișinău, strada Dumitru Rîșcanu 20/1",              // адрес для карты, Google Maps и Waze
+  wa:"37369808880",
+  tel:"+37369808880",
+  telShow:"069 80 88 80",
+  addr:"Or. Chișinău, strada Dumitru Rîșcanu 20/1",
   map:"https://www.google.com/maps?q=" + encodeURIComponent("Or. Chișinău, strada Dumitru Rîșcanu 20/1") + "&output=embed",
-  form:""                                                        // опционально: URL Formspree / Web3Forms
+  form:""
 };
 
-/* Каталог по присланным фото в . price: число в MDL или null = «по запросу» */
+/* Каталог по файлам из корня репозитория */
 const MODELS=[
- {name:"Miele W1",spec:"Miele W1 · Verificată în service · Garanție",price:null,img:"11032.jpg"},
- {name:"Miele PowerWash 2.0",spec:"Miele PowerWash 2.0 · CapDosing · Verificată în service",price:null,img:"11024.jpg"},
- {name:"Miele W 5845",spec:"Miele W 5845 SoftCare System · Verificată în service",price:null,img:"11025.jpg"},
+ {name:"Miele W1",spec:"Miele W1 · Verificată în service · Garanție",price:null,img:"11029.jpg"},
+ {name:"Miele PowerWash 2.0",spec:"Miele PowerWash 2.0 · CapDosing · Verificată în service",price:null,img:"11030.jpg"},
+ {name:"Miele W 5845",spec:"Miele W 5845 SoftCare System · Verificată în service",price:null,img:"04347e19-8e81-49d4-9da1-4ce29f8c608a.jpg"},
  {name:"Miele W 5821",spec:"Miele W 5821 SoftCare System · Verificată în service",price:null,img:"11027.jpg"},
- {name:"Miele W1 Excellence Active",spec:"Miele W1 Excellence Active · Verificată în service",price:null,img:"11023.jpg"},
+ {name:"Miele W1 Excellence Active",spec:"Miele W1 Excellence Active · Verificată în service",price:null,img:"2132cd6c-a231-4cbf-ba84-9effb8e8dc7c.jpg"},
  {name:"Miele W 5723",spec:"Miele W 5723 SoftCare System · Verificată în service",price:null,img:"11026.jpg"}
 ];
 
@@ -435,7 +434,7 @@ ru:{
 
 /* === ЛОГИКА === */
 const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
-let cur="ro", view="index";
+let cur="ro", view="index", step=0, ans=[0,0,0];
 try{const s=localStorage.getItem("pic_lang");if(s=="ro"||s=="ru")cur=s}catch(e){}
 const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ");
 function lead(){try{return JSON.parse(sessionStorage.getItem("pic_lead"))}catch(e){return null}}
@@ -457,118 +456,160 @@ function links(){
 
 function grid(){
   const g=$("#grid");if(!g)return;const t=T[cur];
-  g.innerHTML=MODELS.map(m=>`<article class="card glass tilt"><span class="badge">${t.instock}</span><img src="${m.img}" alt="${m.name}" width="600" height="450" loading="lazy"><h3>${m.name}</h3><p class="sp">${m.spec}</p><div class="pr">${m.price?fmt(m.price)+" MDL":t.price_req}</div><a class="btn wa" data-wa="${m.name}" target="_blank" rel="noopener">${t.ask}</a></article>`).join("");
+  g.innerHTML=MODELS.map(m=>{
+    const pr=m.price==null?t.price_req:fmt(m.price)+" MDL";
+    const waUrl="https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(t.wa_model.replace("{m}",m.name));
+    return `<article class="card glass tilt"><span class="badge">${t.instock}</span><img src="${m.img}" alt="${m.name}" width="600" height="450" loading="lazy"><h3>${m.name}</h3><p class="sp">${m.spec}</p><div class="pr">${pr}</div><a class="btn wa" href="${waUrl}" target="_blank" rel="noopener"><svg class="i"><use href="#wa"/></svg>${t.ask}</a></article>`;
+  }).join("");
+  bindTilt();
 }
 
-function privacy(){
-  const p=$("#pv");if(p)p.innerHTML=T[cur].pv.map(s=>`<h2>${s[0]}</h2><p>${s[1]}</p>`).join("");
+function renderQuiz(){
+  const t=T[cur],box=$("#qsteps"),leadForm=$("#lead"),backBtn=$("#back"),stepn=$("#stepn"),bar=$("#bar");
+  if(!box||!leadForm||!stepn||!bar)return;
+  const qs=[
+    {k:"q1",o:["q1o0","q1o1","q1o2"]},
+    {k:"q2",o:["q2o0","q2o1","q2o2"]},
+    {k:"q3",o:["q3o0","q3o1"]}
+  ];
+  stepn.textContent=(step+1)+" / 4";
+  bar.style.width=((step+1)*25)+"%";
+  if(backBtn)backBtn.hidden=step===0;
+  if(step<3){
+    leadForm.hidden=true;
+    box.hidden=false;
+    const q=qs[step];
+    box.innerHTML=`<div class="step"><h3>${t[q.k]}</h3><div class="opts">${q.o.map((ok,idx)=>`<button type="button" class="btn opt${ans[step]===idx?" on":""}" data-idx="${idx}">${t[ok]}</button>`).join("")}</div></div>`;
+    $$(".opt",box).forEach(b=>b.addEventListener("click",()=>{
+      ans[step]=Number(b.dataset.idx);
+      step++;
+      renderQuiz();
+    }));
+  }else{
+    box.hidden=true;
+    leadForm.hidden=false;
+  }
 }
 
-function apply(){
+function renderPrivacy(){
+  const pv=$("#pv");if(!pv)return;
+  pv.innerHTML=T[cur].pv.map(([h,p])=>`<h2>${h}</h2><p>${p}</p>`).join("");
+}
+
+function applyLang(){
   const t=T[cur];
   document.documentElement.lang=cur;
-  document.body.dataset.page=view;
-  $$("[data-i18n]").forEach(e=>e.innerHTML=t[e.dataset.i18n]);
-  $$("[data-ph]").forEach(e=>e.placeholder=t[e.dataset.ph]);
   document.title=t["t_"+view]||t.t_index;
-  $$(".lang").forEach(s=>s.style.setProperty("--i",cur=="ru"?1:0));
-  $$(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l==cur));
-  grid();privacy();links();
+  $$("[data-i18n]").forEach(e=>{
+    const k=e.dataset.i18n;
+    if(t[k]!=null)e.innerHTML=t[k];
+  });
+  $$("[data-ph]").forEach(e=>{
+    const k=e.dataset.ph;
+    if(t[k]!=null)e.placeholder=t[k];
+  });
+  $$(".lang").forEach(l=>{
+    l.style.setProperty("--i",cur==="ru"?1:0);
+    $$("button",l).forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===cur?"true":"false"));
+  });
+  links();
+  grid();
+  renderQuiz();
+  renderPrivacy();
 }
 
-function setLang(l){
-  if(l==cur)return;
-  try{localStorage.setItem("pic_lang",l)}catch(e){}
-  document.body.classList.add("sw");
-  setTimeout(()=>{cur=l;apply();document.body.classList.remove("sw")},200);
-  $$(".lang").forEach(s=>s.style.setProperty("--i",l=="ru"?1:0));
-  $$(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l==l));
-}
-
-function setView(v){
-  if(!["index","404","thanks","privacy"].includes(v))v="index";
+function setView(v,push=true){
   view=v;
   ["index","404","thanks","privacy"].forEach(id=>{
     const el=$("#view-"+id);
     if(el)el.hidden=(id!==v);
   });
-  apply();
-  window.scrollTo({top:0,behavior:"smooth"});
+  document.body.dataset.page=v;
+  document.title=T[cur]["t_"+v]||T[cur].t_index;
+  if(push){
+    const h=v==="index"?"#top":"#"+v;
+    if(location.hash!==h)history.pushState({v}, "", h);
+  }
+  window.scrollTo({top:0,behavior:"auto"});
 }
 
-$$(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
-document.addEventListener("click",e=>{
-  const btn=e.target.closest("[data-view]");
-  if(!btn)return;
+function bindTilt(){
+  if(window.matchMedia("(hover:none),(prefers-reduced-motion:reduce)").matches)return;
+  $$(".tilt").forEach(el=>{
+    if(el.dataset.tiltBound)return;
+    el.dataset.tiltBound="1";
+    el.addEventListener("mousemove",e=>{
+      const r=el.getBoundingClientRect();
+      const x=e.clientX-r.left,y=e.clientY-r.top;
+      el.style.setProperty("--mx",x+"px");
+      el.style.setProperty("--my",y+"px");
+      const rx=((y/r.height)-.5)*-6;
+      const ry=((x/r.width)-.5)*6;
+      el.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+    el.addEventListener("mouseleave",()=>{
+      el.style.transform="";
+    });
+  });
+}
+
+$$(".lang button").forEach(b=>b.addEventListener("click",()=>{
+  cur=b.dataset.l;
+  try{localStorage.setItem("pic_lang",cur)}catch(e){}
+  applyLang();
+}));
+
+const burger=$("#burger"),nav=$("#nav");
+if(burger&&nav){
+  burger.addEventListener("click",()=>{
+    const open=nav.classList.toggle("open");
+    burger.setAttribute("aria-expanded",String(open));
+  });
+  $$("a",nav).forEach(a=>a.addEventListener("click",()=>{
+    nav.classList.remove("open");
+    burger.setAttribute("aria-expanded","false");
+  }));
+}
+
+$$("[data-view]").forEach(el=>el.addEventListener("click",e=>{
+  const target=el.dataset.view;
+  if(!target)return;
+  if(el.tagName==="A" && target==="index" && el.getAttribute("href")==="#top")return;
   e.preventDefault();
-  setView(btn.dataset.view);
+  setView(target);
+}));
+
+const backBtn=$("#back");
+if(backBtn)backBtn.addEventListener("click",()=>{
+  if(step>0){step--;renderQuiz();}
 });
 
-/* Мобильное меню */
-const bg=$("#burger"),nav=$("#nav");
-if(bg){
-  bg.onclick=()=>{const o=nav.classList.toggle("open");bg.setAttribute("aria-expanded",o)};
-  $$("#nav a").forEach(a=>a.onclick=()=>{nav.classList.remove("open");setView("index")});
-}
+const leadForm=$("#lead");
+if(leadForm)leadForm.addEventListener("submit",e=>{
+  e.preventDefault();
+  const fd=new FormData(leadForm);
+  const data={n:String(fd.get("n")||"").trim(),p:String(fd.get("p")||"").trim(),a:[...ans]};
+  try{sessionStorage.setItem("pic_lead",JSON.stringify(data))}catch(err){}
+  if(CFG.form){
+    fetch(CFG.form,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).catch(()=>{});
+  }
+  links();
+  setView("thanks");
+});
 
-/* Подсветка и наклон за курсором */
-if(matchMedia("(hover:hover) and (pointer:fine)").matches){
-  const rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
-  document.addEventListener("pointermove",e=>{
-    const g=e.target.closest&&e.target.closest(".glass");if(!g)return;
-    const r=g.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
-    g.style.setProperty("--mx",x+"px");g.style.setProperty("--my",y+"px");
-    if(!rm&&g.classList.contains("tilt"))g.style.transform=`perspective(800px) rotateX(${(.5-y/r.height)*6}deg) rotateY(${(x/r.width-.5)*6}deg) translateY(-3px)`;
-  });
-  document.addEventListener("pointerout",e=>{
-    const g=e.target.closest&&e.target.closest(".tilt");
-    if(g&&!g.contains(e.relatedTarget))g.style.transform="";
-  });
-}
+const mload=$("#mload"),mapBox=$("#map");
+if(mload&&mapBox)mload.addEventListener("click",()=>{
+  mapBox.classList.add("on");
+  mapBox.innerHTML=`<iframe src="${CFG.map}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Service Pic MD"></iframe>`;
+});
 
-/* Квиз */
-const qs=$("#qsteps");
-if(qs){
-  let qi=0,ans=[];const QZ=[["q1",3],["q2",3],["q3",2]];
-  qs.innerHTML=QZ.map(([k,n],i)=>`<div class="step" data-q="${i}"><h3 data-i18n="${k}"></h3><div class="opts">${Array.from({length:n},(_,j)=>`<button type="button" class="btn opt" data-j="${j}" data-i18n="${k}o${j}"></button>`).join("")}</div></div>`).join("");
-  const show=i=>{
-    qi=i;
-    $$("#quiz .step").forEach((s,j)=>s.hidden=j!=i);
-    $("#lead").hidden=(i!==QZ.length);
-    $("#bar").style.width=((i+1)/4)*100+"%";
-    $("#stepn").textContent=Math.min(i+1,4)+" / 4";
-    $("#back").hidden=i==0;
-  };
-  qs.onclick=e=>{
-    const b=e.target.closest(".opt");if(!b)return;
-    ans[qi]=+b.dataset.j;
-    $$(".opt",b.parentNode).forEach(x=>x.classList.toggle("on",x==b));
-    setTimeout(()=>show(qi+1),240);
-  };
-  $("#back").onclick=()=>show(Math.max(0,qi-1));
-  $("#lead").onsubmit=e=>{
-    e.preventDefault();
-    const f=e.target,d={a:ans,n:f.n.value.trim(),p:f.p.value.trim(),lang:cur};
-    try{sessionStorage.setItem("pic_lead",JSON.stringify(d))}catch(x){}
-    const finish=()=>{apply();setView("thanks")};
-    if(CFG.form){
-      const t=T[cur];
-      fetch(CFG.form,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({buget:t["q1o"+d.a[0]],incarcare:t["q2o"+d.a[1]],livrare:t["q3o"+d.a[2]],nume:d.n,telefon:d.p,limba:cur})}).then(finish).catch(finish);
-    }else finish();
-  };
-  show(0);
-}
+window.addEventListener("popstate",()=>{
+  const h=location.hash.replace(/^#/,"");
+  if(["404","thanks","privacy"].includes(h))setView(h,false);
+  else setView("index",false);
+});
 
-/* Карта по клику */
-const ml=$("#mload");
-if(ml)ml.onclick=()=>{
-  const m=$("#map"),f=document.createElement("iframe");
-  f.src=CFG.map||"https://www.google.com/maps?q="+encodeURIComponent(CFG.addr)+"&output=embed";
-  f.title="Service Pic MD — Google Maps";f.loading="lazy";f.referrerPolicy="no-referrer-when-downgrade";f.allowFullscreen=true;
-  m.classList.add("on");m.replaceChildren(f);
-};
-
-apply();
+applyLang();
 </script>
 </body>
 </html>
