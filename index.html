@@ -56,13 +56,14 @@ svg.i{width:1.3em;height:1.3em;stroke:currentColor;fill:none;stroke-width:1.7;st
 .btn:active{transform:scale(.96)}
 .btn.p{color:#04202b;border-color:rgba(255,255,255,.5);background:linear-gradient(160deg,#bae6fd,#5eead4)}
 .btn.wa{background:linear-gradient(160deg,rgba(37,211,102,.55),rgba(18,140,70,.55))}
+.btn.tg{background:linear-gradient(160deg,rgba(34,158,217,.6),rgba(16,105,155,.6))}
 
 /* Шапка */
 .hd{position:sticky;top:0;z-index:50;border-radius:0;border-bottom:1px solid rgba(255,255,255,.12)}
 .hd::before,.hd::after{display:none}
 .hb{display:flex;align-items:center;gap:14px;min-height:68px}
-.logo{display:flex;align-items:center;gap:10px;color:var(--tx);text-decoration:none;font-weight:800}
-.logo img{width:44px;height:44px;border-radius:12px;object-fit:cover}
+.logo{display:flex;align-items:center;gap:10px;color:var(--tx);text-decoration:none;font-weight:800;flex-shrink:0}
+.logo img{height:40px;width:auto;max-width:128px;border-radius:10px;object-fit:contain;background:#eef2f6;padding:2px 6px}
 .nav{display:flex;gap:20px;margin-left:auto}
 .nav a{color:var(--mu);text-decoration:none;font-size:15px}
 .nav a:hover{color:var(--tx)}
@@ -80,7 +81,7 @@ svg.i{width:1.3em;height:1.3em;stroke:currentColor;fill:none;stroke-width:1.7;st
 .hero p{color:var(--mu);margin:18px 0 28px;max-width:56ch}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
 .hc{padding:28px;text-align:center}
-.hc img{width:min(220px,100%);border-radius:24px;box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.hc img{width:min(240px,100%);height:auto;border-radius:16px;background:#eef2f6;padding:8px;box-shadow:0 20px 40px rgba(0,0,0,.5)}
 .hc p{margin:14px 0 0;font-size:14px}
 
 /* Каталог и преимущества */
@@ -153,6 +154,7 @@ footer{padding:36px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--mu)
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 00-8.600 15.100L2 22l5-1.300A10 10 0 1012 2zm5.200 14.200c-.2.600-1.300 1.200-1.800 1.200-.5.100-1 .2-3.300-.7-2.800-1.200-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800 0-1.400.7-2 1-2.300.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .5l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.100 1 2 1.300 2.300 1.400.3.100.4.100.6-.1l.8-1c.2-.2.400-.2.600-.1l1.900.9c.2.100.4.200.5.300.1.200.1.800-.1 1.400z"/></symbol>
+<symbol id="tg" viewBox="0 0 24 24"><path fill="currentColor" d="M21.5 4.3c.3-.1.6.1.5.5l-3.1 14.6c-.1.4-.5.6-.9.4l-4.3-3.2-2.1 2c-.2.2-.4.3-.7.3l.3-4.2 7.8-7c.3-.3-.1-.5-.4-.3l-9.6 6-4.1-1.3c-.4-.1-.4-.6 0-.8L21.5 4.3z"/></symbol>
 <symbol id="ph" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></symbol>
 <symbol id="s1" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.500-3.400 8-8 9-4.600-1-8-4.500-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
 <symbol id="s2" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.500 14L7 21l5-3 5 3-1.500-7"/></symbol>
@@ -164,7 +166,7 @@ footer{padding:36px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--mu)
 <header class="hd glass">
   <div class="wrap hb">
     <a class="logo" href="#top" data-view="index">
-      <img src="logo.jpg" alt="Service Pic MD" width="44" height="44">
+      <img src="logo.jpg" alt="PIC.MD Service Centru">
       <span>Service Pic MD</span>
     </a>
     <nav class="nav" id="nav">
@@ -197,7 +199,7 @@ footer{padding:36px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--mu)
           </div>
         </div>
         <aside class="glass hc tilt">
-          <img src="logo.jpg" alt="PIC.MD Service Centru" width="220" height="220">
+          <img src="logo.jpg" alt="PIC.MD Service Centru">
           <p class="mu" data-i18n="hero_c"></p>
         </aside>
       </div>
@@ -260,6 +262,7 @@ footer{padding:36px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--mu)
             <div><b data-i18n="l_ref"></b><span data-i18n="ref"></span></div>
             <div class="btns">
               <a class="btn wa" data-wa="gen" target="_blank" rel="noopener"><svg class="i"><use href="#wa"/></svg>WhatsApp</a>
+              <a class="btn tg" data-tg target="_blank" rel="noopener"><svg class="i"><use href="#tg"/></svg>Telegram</a>
               <a class="btn" data-viber>Viber</a>
             </div>
           </div>
@@ -333,12 +336,13 @@ footer{padding:36px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--mu)
 <script>
 /* === НАСТРОЙКИ ДАННЫХ КЛИЕНТА === */
 const CFG={
-  wa:"37369808880",
-  tel:"+37369808880",
-  telShow:"069 80 88 80",
-  addr:"Or. Chișinău, strada Dumitru Rîșcanu 20/1",
+  wa:"37369808880",                                              // номер WhatsApp в международном формате (без + и пробелов)
+  tg:"https://t.me/servicepicmd",                                // ссылка или @username Telegram (например, "https://t.me/ваш_ник")
+  tel:"+37369808880",                                            // номер для звонка и Viber
+  telShow:"069 80 88 80",                                        // номер на сайте
+  addr:"Or. Chișinău, strada Dumitru Rîșcanu 20/1",              // адрес для карты, Google Maps и Waze
   map:"https://www.google.com/maps?q=" + encodeURIComponent("Or. Chișinău, strada Dumitru Rîșcanu 20/1") + "&output=embed",
-  form:""
+  form:""                                                        // опционально: URL Formspree / Web3Forms
 };
 
 /* Каталог по файлам из корня репозитория */
@@ -440,12 +444,20 @@ const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ");
 function lead(){try{return JSON.parse(sessionStorage.getItem("pic_lead"))}catch(e){return null}}
 function leadMsg(){const d=lead(),t=T[cur];if(!d)return t.wa_gen;return t.wa_lead.replace("{b}",t["q1o"+d.a[0]]).replace("{l}",t["q2o"+d.a[1]]).replace("{d}",t["q3o"+d.a[2]]).replace("{n}",d.n).replace("{p}",d.p)}
 
+function tgHref(){
+  const raw=(CFG.tg||"").trim();
+  if(!raw)return "#";
+  if(/^https?:\/\//i.test(raw))return raw;
+  return "https://t.me/"+raw.replace(/^@/,"");
+}
+
 function links(){
   const t=T[cur],enc=encodeURIComponent;
   $$("[data-wa]").forEach(a=>{
     const k=a.dataset.wa,m=k=="lead"?leadMsg():k=="gen"?t.wa_gen:t.wa_model.replace("{m}",k);
     a.href="https://wa.me/"+CFG.wa+"?text="+enc(m);
   });
+  $$("[data-tg]").forEach(a=>a.href=tgHref());
   $$("[data-tel]").forEach(a=>a.href="tel:"+CFG.tel);
   $$("[data-viber]").forEach(a=>a.href="viber://chat?number="+enc(CFG.tel));
   $$("[data-gmaps]").forEach(a=>a.href="https://www.google.com/maps/search/?api=1&query="+enc(CFG.addr));
