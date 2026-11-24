@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a1020">
 <link rel="icon" href="assets/img/logo.jpg">
 <title>Mașini de spălat verificate cu garanție în Chișinău | Service Pic MD</title>
-<meta name="description" content="Mașini de spălat verificate cu garanție în Chișinău: Bosch, Miele, Siemens, Samsung în stoc. Livrare și conectare, consultanță la alegere. Scrieți-ne pe WhatsApp.">
+<meta name="description" content="Mașini de spălat verificate cu garanție în Chișinău: Miele și alte modele verificate în stoc. Livrare și conectare, consultanță la alegere. Scrieți-ne pe WhatsApp.">
 <meta name="robots" content="index, follow">
 <!-- Open Graph. Для превью в WhatsApp/Telegram замените на полный URL: https://ваш-домен.md/assets/img/og-preview.jpg -->
 <meta property="og:type" content="website">
@@ -191,7 +191,6 @@ footer{padding:36px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--mu)
       <div class="wrap hg">
         <div>
           <h1 data-i18n="h1"></h1>
-          <!-- Бренды: Bosch, Miele, Siemens, Samsung — замените в js (hero_p) на актуальные с профиля -->
           <p data-i18n="hero_p"></p>
           <div class="btns">
             <a class="btn p" href="#stoc"><span data-i18n="b_stock"></span></a>
@@ -333,24 +332,24 @@ footer{padding:36px 0;border-top:1px solid rgba(255,255,255,.12);color:var(--mu)
 <a class="fab" data-wa="gen" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#wa"/></svg></a>
 
 <script>
-/* === НАСТРОЙКИ: ЗАМЕНИТЕ ПЛЕЙСХОЛДЕРЫ === */
+/* === НАСТРОЙКИ ДАННЫХ КЛИЕНТА === */
 const CFG={
-  wa:"373XXXXXXXX",              // номер для wa.me (без + и пробелов)
-  tel:"+373XXXXXXXX",            // номер для звонка и Viber
-  telShow:"+373 XX XXX XXX",     // как показывать на сайте
-  addr:"[Strada ..., Chișinău]", // адрес для карты, Google Maps и Waze
-  map:"",                        // опционально: src из Google Maps -> Поделиться -> Встроить карту
-  form:""                        // опционально: URL Formspree / Web3Forms
+  wa:"37369808880",                                              // номер WhatsApp в международном формате (без + и пробелов)
+  tel:"+37369808880",                                            // номер для звонка и Viber
+  telShow:"069 80 88 80",                                        // номер на сайте
+  addr:"Or. Chișinău, strada Dumitru Rîșcanu 20/1",              // адрес для карты, Google Maps и Waze
+  map:"https://www.google.com/maps?q=" + encodeURIComponent("Or. Chișinău, strada Dumitru Rîșcanu 20/1") + "&output=embed",
+  form:""                                                        // опционально: URL Formspree / Web3Forms
 };
 
-/* Каталог: замените на реальные фото и модели из @service_pic.md. price: число в MDL или null = «по запросу» */
+/* Каталог по присланным фото в assets/img/. price: число в MDL или null = «по запросу» */
 const MODELS=[
- {name:"Bosch Serie 6",spec:"Bosch Serie 6 · 7 kg · Clasa A+++",price:null,img:"assets/img/washer-1.jpg"},
- {name:"Siemens iQ500",spec:"Siemens iQ500 · 8 kg · Clasa A+++",price:null,img:"assets/img/washer-2.jpg"},
- {name:"Samsung EcoBubble",spec:"Samsung EcoBubble · 8 kg · Clasa A+++",price:null,img:"assets/img/washer-3.jpg"},
- {name:"Miele W1",spec:"Miele W1 · 9 kg · Clasa A+++",price:null,img:"assets/img/washer-4.jpg"},
- {name:"Bosch Serie 4",spec:"Bosch Serie 4 · 6 kg · Clasa A++",price:null,img:"assets/img/washer-5.jpg"},
- {name:"Siemens iQ300",spec:"Siemens iQ300 · 7 kg · Clasa A+++",price:null,img:"assets/img/washer-6.jpg"}
+ {name:"Miele W1",spec:"Miele W1 · Verificată în service · Garanție",price:null,img:"assets/img/11032.jpg"},
+ {name:"Miele PowerWash 2.0",spec:"Miele PowerWash 2.0 · CapDosing · Verificată în service",price:null,img:"assets/img/11024.jpg"},
+ {name:"Miele W 5845",spec:"Miele W 5845 SoftCare System · Verificată în service",price:null,img:"assets/img/11025.jpg"},
+ {name:"Miele W 5821",spec:"Miele W 5821 SoftCare System · Verificată în service",price:null,img:"assets/img/11027.jpg"},
+ {name:"Miele W1 Excellence Active",spec:"Miele W1 Excellence Active · Verificată în service",price:null,img:"assets/img/11023.jpg"},
+ {name:"Miele W 5723",spec:"Miele W 5723 SoftCare System · Verificată în service",price:null,img:"assets/img/11026.jpg"}
 ];
 
 /* === ПЕРЕВОДЫ RO / RU === */
@@ -362,7 +361,7 @@ ro:{
  t_privacy:"Politica de confidențialitate | Service Pic MD",
  n_stock:"Modele în stoc",n_adv:"Avantaje",n_quiz:"Selectare rapidă",n_contact:"Contacte",call:"Sunați",
  h1:"Mașini de spălat verificate cu garanție în Chișinău",
- hero_p:"Modele europene verificate în atelier: Bosch, Miele, Siemens, Samsung. Garanție de la service, livrare și conectare în Chișinău. Vă spunem deschis ce avem în stoc și la ce preț.",
+ hero_p:"Modele europene verificate în atelier, inclusiv Miele. Garanție de la service, livrare și conectare în Chișinău. Vă spunem deschis ce avem în stoc și la ce preț.",
  b_stock:"Vezi modelele în stoc",b_wa:"Scrie pe WhatsApp",hero_c:"Service și magazin de mașini de spălat verificate",
  stock_h:"Modele în stoc",stock_p:"Stocul se schimbă des. Confirmăm disponibilitatea și prețul final pe WhatsApp.",instock:"În stoc",ask:"Întreabă pe WhatsApp",price_req:"Preț la cerere",
  adv_h:"De ce la service, și nu de la un vânzător ocazional",
@@ -376,7 +375,7 @@ ro:{
  q3:"Aveți nevoie de livrare și conectare?",q3o0:"Da, livrare + conectare",q3o1:"Ridicare personală",
  q4:"Unde vă contactăm?",ph_name:"Numele dumneavoastră",ph_phone:"Telefon / WhatsApp",
  consent:'Sunt de acord cu prelucrarea datelor conform <a href="#privacy" data-view="privacy">politicii de confidențialitate</a>.',send:"Trimite cererea",back:"Înapoi",
- contact_h:"Unde ne găsiți",l_addr:"Adresă",l_hours:"Program",hours:"Luni–Vineri 09:00–18:00, Sâmbătă 10:00–15:00 [înlocuiți]",l_tel:"Telefon",l_ref:"Reper",ref:"[indicați un reper lângă service]",
+ contact_h:"Unde ne găsiți",l_addr:"Adresă",l_hours:"Program",hours:"Luni–Vineri 09:00–18:00, Sâmbăta 09:00–14:00",l_tel:"Telefon",l_ref:"Reper",ref:"Strada Dumitru Rîșcanu 20/1, Chișinău",
  gmaps:"Deschide în Google Maps",waze:"Deschide în Waze",map_load:"Încarcă harta",map_note:"Harta se încarcă doar la cererea dumneavoastră. La încărcare, Google primește date despre vizită.",
  foot_p:"Service Pic MD — service și magazin de mașini de spălat verificate în Chișinău.",privacy:"Politica de confidențialitate",
  h404:"404 — Pagina nu a fost găsită",p404:"Pagina a fost mutată sau ștearsă. Modelele actuale le găsiți în catalog, iar dacă aveți întrebări, scrieți-ne.",home:"Înapoi la pagina principală",
@@ -385,7 +384,7 @@ ro:{
  wa_lead:"Bună ziua! Am trimis o cerere pe site. Buget: {b}. Încărcare: {l}. Livrare: {d}. Nume: {n}. Telefon: {p}.",
  pv_h:"Politica de confidențialitate",
  pv:[
-  ["1. Operatorul datelor","[Service Pic MD / SRL ...], IDNO [...], adresa [...], telefon [...], e-mail [...]."],
+  ["1. Operatorul datelor","[Service Pic MD / SRL ...], IDNO [...], adresa: Or. Chișinău, strada Dumitru Rîșcanu 20/1, telefon: 069 80 88 80."],
   ["2. Ce date colectăm","Numele, numărul de telefon / WhatsApp și răspunsurile din formularul de selectare (buget, încărcare, livrare), precum și mesajele pe care ni le trimiteți prin telefon, WhatsApp sau Viber."],
   ["3. Scopul prelucrării","Vă contactăm, vă consultăm la alegerea mașinii de spălat și vă confirmăm stocul, prețul și livrarea. Nu folosim datele pentru publicitate fără acordul dumneavoastră."],
   ["4. Temeiul legal","Consimțământul dumneavoastră (bifa din formular) și măsurile precontractuale cerute de dumneavoastră, conform Legii nr. 195/2024 privind protecția datelor cu caracter personal."],
@@ -401,7 +400,7 @@ ru:{
  t_privacy:"Политика конфиденциальности | Service Pic MD",
  n_stock:"Модели в наличии",n_adv:"Преимущества",n_quiz:"Быстрый подбор",n_contact:"Контакты",call:"Позвонить",
  h1:"Проверенные стиральные машины с гарантией в Кишинёве",
- hero_p:"Европейские модели, проверенные в мастерской: Bosch, Miele, Siemens, Samsung. Гарантия от сервиса, доставка и подключение по Кишинёву. Честно скажем, что есть в наличии и сколько это стоит.",
+ hero_p:"Европейские модели, проверенные в мастерской, включая Miele. Гарантия от сервиса, доставка и подключение по Кишинёву. Честно скажем, что есть в наличии и сколько это стоит.",
  b_stock:"Смотреть в наличии",b_wa:"Написать в WhatsApp",hero_c:"Сервис и магазин проверенных стиральных машин",
  stock_h:"Модели в наличии",stock_p:"Ассортимент часто меняется. Наличие и итоговую цену подтвердим в WhatsApp.",instock:"В наличии",ask:"Узнать в WhatsApp",price_req:"Цена по запросу",
  adv_h:"Почему в сервисе, а не у случайного продавца",
@@ -415,7 +414,7 @@ ru:{
  q3:"Нужны доставка и подключение?",q3o0:"Да, доставка + подключение",q3o1:"Самовывоз",
  q4:"Как с вами связаться?",ph_name:"Ваше имя",ph_phone:"Телефон / WhatsApp",
  consent:'Я согласен(на) на обработку данных согласно <a href="#privacy" data-view="privacy">политике конфиденциальности</a>.',send:"Отправить заявку",back:"Назад",
- contact_h:"Как добраться и контакты",l_addr:"Адрес",l_hours:"График работы",hours:"Пн–Пт 09:00–18:00, Сб 10:00–15:00 [замените]",l_tel:"Телефон",l_ref:"Ориентир",ref:"[укажите ориентир рядом с сервисом]",
+ contact_h:"Как добраться и контакты",l_addr:"Адрес",l_hours:"График работы",hours:"Пн–Пт 09:00–18:00, Сб 09:00–14:00",l_tel:"Телефон",l_ref:"Ориентир",ref:"ул. Думитру Рышкану 20/1, Кишинёв",
  gmaps:"Открыть в Google Maps",waze:"Открыть в Waze",map_load:"Загрузить карту",map_note:"Карта загружается только по вашему запросу. При загрузке Google получает данные о визите.",
  foot_p:"Service Pic MD — сервис и магазин проверенных стиральных машин в Кишинёве.",privacy:"Политика конфиденциальности",
  h404:"404 — Страница не найдена",p404:"Страница перемещена или удалена. Актуальные модели есть в каталоге, а если остались вопросы, напишите нам.",home:"На главную",
@@ -424,7 +423,7 @@ ru:{
  wa_lead:"Здравствуйте! Оставил(а) заявку на сайте. Бюджет: {b}. Загрузка: {l}. Доставка: {d}. Имя: {n}. Телефон: {p}.",
  pv_h:"Политика конфиденциальности",
  pv:[
-  ["1. Оператор данных","[Service Pic MD / SRL ...], IDNO [...], адрес [...], телефон [...], e-mail [...]."],
+  ["1. Оператор данных","[Service Pic MD / SRL ...], IDNO [...], адрес: г. Кишинёв, ул. Думитру Рышкану 20/1, телефон: 069 80 88 80."],
   ["2. Какие данные мы собираем","Имя, номер телефона / WhatsApp и ответы из формы подбора (бюджет, загрузка, доставка), а также сообщения, которые вы отправляете по телефону, в WhatsApp или Viber."],
   ["3. Цель обработки","Мы связываемся с вами, консультируем по выбору стиральной машины и подтверждаем наличие, цену и доставку. Без вашего согласия мы не используем данные для рекламы."],
   ["4. Правовое основание","Ваше согласие (галочка в форме) и преддоговорные действия по вашему запросу в соответствии с Законом № 195/2024 о защите персональных данных."],
